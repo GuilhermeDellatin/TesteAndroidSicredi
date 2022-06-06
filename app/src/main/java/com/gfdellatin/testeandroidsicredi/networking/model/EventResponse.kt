@@ -1,10 +1,7 @@
 package com.gfdellatin.testeandroidsicredi.networking.model
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class EventResponse (
     @SerializedName("id")
     val id: String,
@@ -24,4 +21,4 @@ data class EventResponse (
     val price: Double,
     @SerializedName("title")
     val title: String
-) : Parcelable
+)
