@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class EventResponse (
     @SerializedName("id")
-    val id: String,
+    val id: String?,
     @SerializedName("people")
     val people: List<PeopleResponse>,
     @SerializedName("date")
-    val date: String,
+    val date: Long,
     @SerializedName("description")
     val description: String,
     @SerializedName("image")
