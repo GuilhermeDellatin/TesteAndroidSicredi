@@ -1,12 +1,14 @@
 package com.gfdellatin.testeandroidsicredi.domain.model
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import androidx.annotation.Keep
 import kotlinx.parcelize.Parcelize
 
+@Keep
 @Parcelize
 data class People(
-    val eventId: String,
+    val id: String?,
+    val eventId: String?,
     val name: String,
     val email: String,
 ) : Parcelable
