@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.gfdellatin.testeandroidsicredi.R
+import com.gfdellatin.testeandroidsicredi.core.formatCurrency
 import com.gfdellatin.testeandroidsicredi.core.toFormatDate
 import com.gfdellatin.testeandroidsicredi.core.toFormatHour
 import com.gfdellatin.testeandroidsicredi.databinding.FragmentEventDetailBinding
@@ -20,12 +21,11 @@ class EventDetailFragment: Fragment() {
         FragmentEventDetailBinding.inflate(layoutInflater)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let { bundle ->
-            eventSelected = bundle.getParcelable("event")!!
+            eventSelected = EventDetailFragmentArgs.fromBundle(bundle).event
         }
 
     }
@@ -43,7 +43,7 @@ class EventDetailFragment: Fragment() {
         initBinds()
     }
 
-    private fun initBinds(/*event: Event*/) {
+    private fun initBinds() {
         with(binding) {
             Glide.with(root)
                 .load(eventSelected.image)
@@ -52,6 +52,7 @@ class EventDetailFragment: Fragment() {
             eventTitleDetail.text = eventSelected.title
             dayTv.text = eventSelected.date.toFormatDate()
             hourTv.text = eventSelected.date.toFormatHour()
+            chipPrice.text = eventSelected.price.formatCurrency()
         }
     }
 

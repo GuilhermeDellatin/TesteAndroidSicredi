@@ -1,6 +1,7 @@
 package com.gfdellatin.testeandroidsicredi.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -48,6 +49,9 @@ class EventListAdapter(
                 eventHourTv.text = event.date.toFormatHour()
                 chipStar.text = event.price.formatCurrency(Locale.getDefault())
 
+                itemView.setOnClickListener {
+                    onDetailsItemClick?.invoke(event)
+                }
                 imgEvent.setOnClickListener {
                     onDetailsItemClick?.invoke(event)
                 }
