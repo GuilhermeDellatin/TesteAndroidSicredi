@@ -9,6 +9,23 @@
         android:id="@+id/eventListFragment"
         android:name="com.gfdellatin.testeandroidsicredi.ui.fragment.EventListFragment"
         tools:layout="@layout/fragment_event_list"
-        />
+        android:label="fragment_event_list">
+        <action
+            android:id="@+id/toEventDetail"
+            app:destination="@id/eventDetailFragment"
+            />
+    </fragment>
+
+    <fragment
+        android:id="@+id/eventDetailFragment"
+        android:name="com.gfdellatin.testeandroidsicredi.ui.fragment.EventDetailFragment"
+        android:label="fragment_event_detail">
+
+        <argument
+            android:name="event"
+            app:argType="com.gfdellatin.testeandroidsicredi.domain.model.Event"
+            app:nullable="false"/>
+
+    </fragment>
 
 </navigation>
