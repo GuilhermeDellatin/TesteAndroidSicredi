@@ -14,7 +14,11 @@ import com.gfdellatin.testeandroidsicredi.databinding.EventItemBinding
 import com.gfdellatin.testeandroidsicredi.domain.model.Event
 import java.util.*
 
-class EventListAdapter : ListAdapter<Event, EventListAdapter.EventListViewHolder>(DIFF_CALLBACK) {
+typealias  OnDetailsItemClick = ((event: Event) -> Unit)?
+
+class EventListAdapter(
+    private val onDetailsItemClick: OnDetailsItemClick
+) : ListAdapter<Event, EventListAdapter.EventListViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Event>() {
@@ -29,7 +33,8 @@ class EventListAdapter : ListAdapter<Event, EventListAdapter.EventListViewHolder
     }
 
     class EventListViewHolder(
-        private val itemBinding: EventItemBinding
+        private val itemBinding: EventItemBinding,
+        private val onDetailsItemClick: OnDetailsItemClick
     ) : RecyclerView.ViewHolder(itemBinding.root) {
 
         fun bind(event: Event) {
@@ -42,21 +47,25 @@ class EventListAdapter : ListAdapter<Event, EventListAdapter.EventListViewHolder
                 eventDateTv.text = event.date.toFormatDate()
                 eventHourTv.text = event.date.toFormatHour()
                 chipStar.text = event.price.formatCurrency(Locale.getDefault())
+
+                imgEvent.setOnClickListener {
+                    onDetailsItemClick?.invoke(event)
+                }
             }
         }
 
         companion object {
-            fun create(parent: ViewGroup) : EventListViewHolder {
+            fun create(parent: ViewGroup, onDetailsItemClick: OnDetailsItemClick) : EventListViewHolder {
                 val itemBinding = EventItemBinding
                     .inflate(LayoutInflater.from(parent.context), parent, false)
-                return EventListViewHolder(itemBinding)
+                return EventListViewHolder(itemBinding, onDetailsItemClick)
             }
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventListViewHolder {
-        return EventListViewHolder.create(parent)
+        return EventListViewHolder.create(parent, onDetailsItemClick)
     }
 
     override fun onBindViewHolder(holder: EventListViewHolder, position: Int) {
