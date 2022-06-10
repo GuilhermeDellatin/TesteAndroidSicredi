@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.gfdellatin.testeandroidsicredi.core.State
 import com.gfdellatin.testeandroidsicredi.databinding.FragmentEventListBinding
 import com.gfdellatin.testeandroidsicredi.ui.adapter.EventListAdapter
 import com.gfdellatin.testeandroidsicredi.ui.view_model.EventListViewModel
@@ -49,18 +50,20 @@ class EventListFragment : Fragment() {
 
         viewModel.eventsLiveData.observe(viewLifecycleOwner) {
             when (it) {
-                is EventListViewModel.State.Loading -> {
+
+                State.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                 }
-                is EventListViewModel.State.Error -> {
+                is State.Error -> {
                     binding.progressBar.visibility = View.GONE
                 }
-                is EventListViewModel.State.Success -> {
+                is State.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    eventListAdapter.submitList(it.list)
+                    eventListAdapter.submitList(it.result)
                 }
             }
         }
 
     }
+
 }
