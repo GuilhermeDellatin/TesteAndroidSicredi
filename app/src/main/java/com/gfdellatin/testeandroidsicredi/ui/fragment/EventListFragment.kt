@@ -50,20 +50,40 @@ class EventListFragment : Fragment() {
 
         viewModel.eventsLiveData.observe(viewLifecycleOwner) {
             when (it) {
-
-                State.Loading -> {
-                    binding.progressBar.visibility = View.VISIBLE
+                is State.Loading -> {
+                    showProgress(true)
                 }
                 is State.Error -> {
-                    binding.progressBar.visibility = View.GONE
+                    setupErrorView()
                 }
                 is State.Success -> {
-                    binding.progressBar.visibility = View.GONE
+                    showProgress(false)
                     eventListAdapter.submitList(it.result)
                 }
             }
         }
 
+    }
+
+    private fun showProgress(showProgress: Boolean) {
+        if (showProgress) {
+            binding.progressBar.visibility = View.VISIBLE
+            binding.errorView.errorView.visibility = View.GONE
+            binding.recyclerViewEvents.visibility = View.GONE
+        } else {
+            binding.progressBar.visibility = View.GONE
+            binding.recyclerViewEvents.visibility = View.VISIBLE
+        }
+    }
+
+    private fun setupErrorView() {
+        binding.progressBar.visibility = View.GONE
+        binding.errorView.errorView.visibility = View.VISIBLE
+        binding.recyclerViewEvents.visibility = View.GONE
+
+        binding.errorView.btnTryAgain.setOnClickListener {
+            viewModel.getEventList()
+        }
     }
 
 }

@@ -17,19 +17,10 @@ class EventListViewModel(
     private val listEventsUseCase: ListEventsUseCase,
 ) : ViewModel() {
 
-    private val _progressLiveData = MutableLiveData<Boolean>()
-    val progressLiveData: LiveData<Boolean> get() = _progressLiveData
-
     private val _eventsLiveData = MutableLiveData<State<List<Event>>>()
     val eventsLiveData: LiveData<State<List<Event>>> get() = _eventsLiveData
 
-    fun showProgressBar() {
-        _progressLiveData.value = true
-    }
 
-    fun hideProgressBar() {
-        _progressLiveData.value = false
-    }
 
     init {
         getEventList()
@@ -40,15 +31,12 @@ class EventListViewModel(
             listEventsUseCase()
                 .flowOn(Dispatchers.Main)
                 .onStart {
-                    _progressLiveData.value = true
                     _eventsLiveData.postValue(State.Loading)
                 }
                 .catch {
-                    _progressLiveData.value = false
                     _eventsLiveData.postValue(State.Error(it))
                 }
                 .collect {
-                    _progressLiveData.value = false
                     _eventsLiveData.postValue(State.Success(it))
                 }
         }
