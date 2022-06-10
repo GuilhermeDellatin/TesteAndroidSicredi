@@ -20,7 +20,7 @@
         android:id="@+id/eventDetailFragment"
         android:name="com.gfdellatin.testeandroidsicredi.ui.fragment.EventDetailFragment"
         tools:layout="@layout/fragment_event_detail"
-        android:label="fragment_event_detail">
+        android:label="@string/fragment_event_detail_label">
 
         <argument
             android:name="event"

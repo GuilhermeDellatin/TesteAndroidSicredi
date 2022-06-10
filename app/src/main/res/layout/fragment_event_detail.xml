@@ -1,33 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     tools:context=".ui.fragment.EventDetailFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_start_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="@dimen/layout_padding"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_end_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="@dimen/layout_padding"/>
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/img_event_detail"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         app:layout_collapseMode="parallax"
-        app:layout_constraintEnd_toEndOf="@+id/guideline_end_img"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_img_placeholder" />
 
@@ -43,8 +30,8 @@
             android:id="@+id/image_favorite_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:importantForAccessibility="no"
             android:layout_marginEnd="@dimen/layout_half_padding"
+            android:importantForAccessibility="no"
             tools:srcCompat="@drawable/ic_favorite_checked" />
 
         <ProgressBar
@@ -58,12 +45,12 @@
         android:id="@+id/nScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/img_event_detail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline_start"
-        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
         android:layout_marginTop="@dimen/layout_padding"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guideline_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_start"
+        app:layout_constraintTop_toBottomOf="@id/img_event_detail">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -74,73 +61,90 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="@dimen/layout_padding"/>
+                app:layout_constraintGuide_begin="@dimen/layout_half_padding" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_end="@dimen/layout_padding"/>
+                app:layout_constraintGuide_end="@dimen/layout_half_padding" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/event_title_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/layout_half_padding"
-                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                tools:text="Feira de Troca de Livros"/>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Feira de Troca de Livros" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/day_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/layout_half_padding"
-                app:layout_constraintTop_toBottomOf="@id/event_title_detail"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
-
-                tools:text="12/06/2022"
-                />
+                app:layout_constraintTop_toBottomOf="@id/event_title_detail"
+                tools:text="12/06/2022" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/hour_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/layout_half_padding"
-                app:layout_constraintTop_toBottomOf="@id/day_tv"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/guideline_start"
-                tools:text="17:00"
-                />
+                app:layout_constraintTop_toBottomOf="@id/day_tv"
+                tools:text="17:00" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/description_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
                 android:layout_margin="@dimen/layout_half_padding"
-                app:layout_constraintTop_toBottomOf="@id/hour_tv"
+                android:layout_marginEnd="@dimen/layout_padding"
+                android:paddingStart="0dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_small"
                 app:layout_constraintStart_toEndOf="@+id/guideline_start"
-                app:layout_constraintEnd_toStartOf="@+id/guideline_end"
-                tools:text="A feira de troca de livros é um evento..."
-                />
+                app:layout_constraintTop_toBottomOf="@id/hour_tv"
+                tools:text="A feira de troca de livros é um evento..." />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="R$ 19.99"
-                app:chipBackgroundColor="@color/strong_green"
-                android:textColor="@color/white"
+                android:layout_marginEnd="@dimen/layout_half_padding"
                 android:textAlignment="center"
-                app:layout_constraintTop_toBottomOf="@id/event_title_detail"
-                app:layout_constraintEnd_toEndOf="@+id/guideline_end"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_normal"
+                app:chipBackgroundColor="@color/strong_green"
                 app:layout_constraintBottom_toTopOf="@id/description_tv"
-                android:layout_marginEnd="@dimen/layout_half_padding"/>
+                app:layout_constraintEnd_toEndOf="@+id/guideline_end"
+                app:layout_constraintTop_toBottomOf="@id/event_title_detail"
+                tools:text="R$ 19.99" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/img_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_half_padding"
+                android:layout_marginEnd="@dimen/layout_half_padding"
+                android:src="@drawable/ic_share_event"
+                app:layout_constraintEnd_toEndOf="@id/guideline_end"
+                app:layout_constraintTop_toBottomOf="@id/nScrollView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

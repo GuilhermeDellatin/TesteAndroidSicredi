@@ -3,4 +3,5 @@
     <string name="title_home">Eventos</string>
     <string name="title_favorites">Favoritos</string>
     <string name="fragment_event_list_label">Eventos</string>
+    <string name="fragment_event_detail_label">Detalhes do Evento</string>
 </resources>

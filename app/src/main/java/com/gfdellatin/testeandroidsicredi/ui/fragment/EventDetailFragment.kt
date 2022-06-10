@@ -53,6 +53,7 @@ class EventDetailFragment: Fragment() {
             dayTv.text = eventSelected.date.toFormatDate()
             hourTv.text = eventSelected.date.toFormatHour()
             chipPrice.text = eventSelected.price.formatCurrency()
+            descriptionTv.text = eventSelected.description
         }
     }
 
